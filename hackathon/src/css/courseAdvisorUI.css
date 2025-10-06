@@ -1,12 +1,7 @@
 /* General layout */
 .advisor-screen {
-  background-color: #0d0d0d;
   color: #e0e0e0;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 40px 15px;
+  padding: 0;
 }
 
 /* Card container */
@@ -54,6 +49,7 @@
   border-radius: 6px;
   color: #fff;
   font-size: 0.95rem;
+  box-sizing: border-box;
 }
 
 .form-input::placeholder {
@@ -70,6 +66,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  box-sizing: border-box;
 }
 
 .advisor-button:hover {
