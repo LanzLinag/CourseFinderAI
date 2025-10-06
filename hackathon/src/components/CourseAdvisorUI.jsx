@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import useCourseAdvisor from "../hooks/useCourseAdvisor";
+import "../css/courseAdvisorUI.css";
 
 function CourseAdvisorUI() {
   const {
@@ -37,20 +38,19 @@ function CourseAdvisorUI() {
   }, [chatHistory, recommendation]);
 
   return (
-    <div className="d-flex justify-content-center align-items-start mt-5 mb-5">
-      <div className="card p-4 shadow-lg" style={{ width: "100%", maxWidth: "550px" }}>
-        <h3 className="text-center mb-3">🎓 College Course Finder</h3>
-        <p className="text-center text-muted mb-4">
+     <div className="advisor-screen">
+      <div className="advisor-card">
+        <h3 className="advisor-title">🎓 College Course Finder</h3>
+        <p className="advisor-description">
           Enter your hobbies, favorite subject, and preferred work setting — the AI will suggest the best college course for you and chat about it.
         </p>
 
-        {/* Initial Course Form */}
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label className="form-label fw-bold">Hobbies:</label>
+        <form onSubmit={handleSubmit} className="advisor-form">
+          <div className="form-group">
+            <label className="form-label">Hobbies:</label>
             <input
               type="text"
-              className="form-control"
+              className="form-input"
               value={hobbies}
               onChange={(e) => setHobbies(e.target.value)}
               placeholder="e.g., coding, drawing, helping others"
@@ -58,11 +58,11 @@ function CourseAdvisorUI() {
             />
           </div>
 
-          <div className="mb-3">
-            <label className="form-label fw-bold">Favorite Subject:</label>
+          <div className="form-group">
+            <label className="form-label">Favorite Subject:</label>
             <input
               type="text"
-              className="form-control"
+              className="form-input"
               value={favoriteSubject}
               onChange={(e) => setFavoriteSubject(e.target.value)}
               placeholder="e.g., Math, Science, English"
@@ -70,11 +70,11 @@ function CourseAdvisorUI() {
             />
           </div>
 
-          <div className="mb-4">
-            <label className="form-label fw-bold">Preferred Work Setting:</label>
+          <div className="form-group">
+            <label className="form-label">Preferred Work Setting:</label>
             <input
               type="text"
-              className="form-control"
+              className="form-input"
               value={workSetting}
               onChange={(e) => setWorkSetting(e.target.value)}
               placeholder="e.g., office, outdoors, hospital, creative studio"
@@ -82,78 +82,46 @@ function CourseAdvisorUI() {
             />
           </div>
 
-          <button type="submit" className="btn btn-primary w-100 mb-4" disabled={loadingCourse}>
+          <button type="submit" className="advisor-button" disabled={loadingCourse}>
             {loadingCourse ? "Analyzing..." : "Find My Course"}
           </button>
         </form>
 
-        {error && <div className="alert alert-danger mt-3">{error}</div>}
+        {error && <div className="advisor-error">{error}</div>}
 
         {recommendation && (
-          <div className="mt-4">
-            {/* Recommended Course */}
-            <div className="alert alert-success p-3">
-              <h5 className="fw-bold">Recommended Course:</h5>
+          <div className="advisor-recommendation">
+            <div className="advisor-course">
+              <h5>Recommended Course:</h5>
               <strong>{recommendation.recommended_course}</strong>
-              <p className="mt-2">{recommendation.reason}</p>
+              <p>{recommendation.reason}</p>
             </div>
 
-            {/* Chat Title */}
-            <h6 className="fw-bold mb-2">Learn more about the course:</h6>
+            <h6 className="chat-heading">Learn more about the course:</h6>
 
-            {/* Chat History */}
-            <div className="chat-container d-flex flex-column" style={{ maxHeight: "400px", overflowY: "auto" }}>
+            <div className="chat-container">
               {chatHistory.map((chat, index) => (
-                <div key={index} className="mb-3">
-                  {/* User Question */}
-                  <div className="d-flex justify-content-end mb-1">
-                    <div
-                      className="p-2 rounded"
-                      style={{
-                        backgroundColor: "#0d6efd",
-                        color: "#fff",
-                        maxWidth: "80%",
-                        wordWrap: "break-word",
-                      }}
-                    >
-                      {chat.question}
-                    </div>
-                  </div>
-                  {/* AI Answer */}
-                  <div className="d-flex justify-content-start">
-                    <div
-                      className="p-2 rounded"
-                      style={{
-                        backgroundColor: "#e9ecef",
-                        color: "#000",
-                        maxWidth: "80%",
-                        wordWrap: "break-word",
-                      }}
-                    >
-                      {chat.answer}
-                    </div>
-                  </div>
+                <div key={index} className="chat-message">
+                  <div className="chat-user">{chat.question}</div>
+                  <div className="chat-ai">{chat.answer}</div>
                 </div>
               ))}
               <div ref={chatEndRef}></div>
             </div>
 
-            {/* Input at bottom of chat */}
-            <form onSubmit={handleFollowUp} className="mt-3">
-              <div className="input-group">
-                <input
-                  type="text"
-                  className="form-control"
-                  value={followUpQuestion}
-                  onChange={(e) => setFollowUpQuestion(e.target.value)}
-                  placeholder="Ask more about this course..."
-                  disabled={loadingChat}
-                  required
-                />
-                <button className="btn btn-secondary" type="submit" disabled={loadingChat}>
-                  {loadingChat ? "Thinking..." : "Ask"}
-                </button>
-              </div>
+            <form onSubmit={handleFollowUp} className="chat-input-form">
+              <input
+                type="text"
+                className="chat-input"
+                value={followUpQuestion}
+                onChange={(e) => setFollowUpQuestion(e.target.value)}
+                placeholder="Ask more about this course..."
+                disabled={loadingChat}
+                required
+              />
+              <button className="chat-button" type="submit" disabled={loadingChat}>
+                {loadingChat ? "Thinking..." : "Ask"}
+              </button>
             </form>
           </div>
         )}

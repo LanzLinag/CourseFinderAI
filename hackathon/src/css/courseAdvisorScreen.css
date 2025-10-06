@@ -1,0 +1,38 @@
+/* Page background */
+.advisor-screen-container {
+  background-color: #0d0d0d;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 15px;
+  color: #e0e0e0;
+}
+
+/* Inner content wrapper */
+.advisor-screen-content {
+  width: 100%;
+  max-width: 650px;
+  text-align: center;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Header styles */
+.advisor-screen-title {
+  font-size: 1.8rem;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.advisor-screen-subtitle {
+  font-size: 1rem;
+  color: #a8a8a8;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+/* Smooth fade animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
