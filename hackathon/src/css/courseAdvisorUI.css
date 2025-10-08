@@ -33,6 +33,11 @@
 }
 
 /* Form styling */
+.advisor-form {
+  flex: 1;
+  margin-left: 20px; /* adds spacing from the chat box */
+}
+
 .advisor-form .form-group {
   margin-bottom: 20px;
 }
@@ -88,6 +93,7 @@
 /* Recommendation Section */
 .advisor-recommendation {
   margin-top: 25px;
+  margin-left: 20px;
 }
 
 .advisor-course {
@@ -253,7 +259,21 @@
   }
 
   .advisor-chat {
-    width: 100%;
-    margin-top: 15px;
+    width: 90%;
+    margin-top: 0px;
   }
+
+  .advisor-form {
+    flex: 1;
+    margin-left: 0px;
+}
+
+  .advisor-button {
+    margin-bottom: 15px;
+  }
+
+  .advisor-recommendation {
+    margin-left: 0px;
+  }
+
 }
