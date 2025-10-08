@@ -185,3 +185,20 @@
 .chat-container::-webkit-scrollbar-track {
   background: #1c1c1c;
 }
+
+/*mobile*/
+@media (max-width: 500px) {
+  .advisor-card {
+    padding: 10px;
+    max-width: 95%; 
+  }
+
+  .chat-input-form {
+    flex-direction: column; 
+    gap: 10px;
+  }
+
+  .chat-button {
+    width: 100%; 
+  }
+}
