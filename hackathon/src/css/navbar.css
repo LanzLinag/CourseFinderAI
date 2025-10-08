@@ -1,0 +1,44 @@
+/* src/css/navbar.css */
+
+.navbar {
+  width: 100%;
+  background-color: #1c1c1c; /* Matches the advisor card background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  padding: 15px 0;
+  color: #e0e0e0;
+}
+
+.navbar-content {
+  /* This centers the content of the navbar up to a certain width */
+  max-width: 1200px; 
+  margin: 0 auto;
+  padding: 0 20px; /* Horizontal padding for responsiveness */
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none; /* In case you make it a link later */
+}
+
+.navbar-logo {
+  height: 50px; /* Set a fixed height for the logo */
+  width: auto;
+  margin-right: 10px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.navbar-title {
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff; /* White text for high visibility */
+}
+
+/* Optional: Make the title slightly smaller on mobile */
+@media (max-width: 500px) {
+  .navbar-title {
+    font-size: 1.3rem;
+  }
+}
