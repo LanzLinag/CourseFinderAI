@@ -2,17 +2,20 @@
 .advisor-screen {
   color: #e0e0e0;
   padding: 0;
+  justify-content: center;
+  display: flex;
 }
 
 /* Card container */
 .advisor-card {
   background-color: #1c1c1c;
   width: 100%;
-  max-width: 600px;
+  max-width: 950px;
   border-radius: 12px;
-  padding: 30px;
+  padding: 25px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
   animation: fadeIn 0.3s ease-in-out;
+  margin: 0 auto;
 }
 
 /* Typography */
@@ -200,5 +203,57 @@
 
   .chat-button {
     width: 100%; 
+  }
+}
+
+/* --- Responsive side-by-side layout when recommendation appears --- */
+.advisor-layout {
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  gap: 25px;
+}
+
+/* When recommendation appears, switch to row layout */
+.active-layout {
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+/* Left side (Form + Recommendation) */
+.advisor-left {
+  flex: 1;
+  transition: all 0.3s ease;
+}
+
+/* Right side (Chatbot) */
+.advisor-chat {
+  flex: 1;
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Slight shift of the form when side-by-side */
+.with-recommendation .advisor-left {
+  transform: translateX(-20px);
+}
+
+/* Responsive fix for mobile */
+@media (max-width: 768px) {
+  .active-layout {
+    flex-direction: column;
+  }
+
+  .with-recommendation .advisor-left {
+    transform: none;
+  }
+
+  .advisor-chat {
+    width: 100%;
+    margin-top: 15px;
   }
 }
