@@ -5,8 +5,12 @@ import "../css/navbar.css";
 function Navbar() {
   const logoPath = "/pathfinder-logo.png"; 
 
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+
   return (
-    <nav className="navbar">
+    <nav className="navbar" onClick={handleRefresh}>
       <div className="navbar-content">
         <div className="navbar-brand">
           <img src={logoPath} alt="Path Finder Logo" className="navbar-logo" />

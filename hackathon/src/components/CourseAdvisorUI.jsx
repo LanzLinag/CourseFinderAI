@@ -38,84 +38,84 @@ function CourseAdvisorUI() {
   }, [chatHistory, recommendation]);
 
   return (
-      // The main container remains the same, but the 'advisor-card' inside will be the focus of the new layout
     <div className="advisor-screen">
-    <div className={`advisor-card ${recommendation ? "with-recommendation" : ""}`}>
-      <h3 className="advisor-title">🎓 College Course Finder</h3>
-      <p className="advisor-description">
-        Enter your hobbies, favorite subject, and preferred work setting — the AI will suggest
-        the best college course for you and chat about it.
-      </p>
+      <div className={`advisor-card always-visible`}>
 
-      <div className={`advisor-layout ${recommendation ? "active-layout" : ""}`}>
-        {/* Left side – Form & Recommendation */}
-        <div className="advisor-left">
-          <form onSubmit={handleSubmit} className="advisor-form">
-            <div className="form-group">
-              <label className="form-label">Hobbies:</label>
-              <input
-                type="text"
-                className="form-input"
-                value={hobbies}
-                onChange={(e) => setHobbies(e.target.value)}
-                placeholder="e.g., coding, drawing, helping others"
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="form-label">Favorite Subject:</label>
-              <input
-                type="text"
-                className="form-input"
-                value={favoriteSubject}
-                onChange={(e) => setFavoriteSubject(e.target.value)}
-                placeholder="e.g., Math, Science, English"
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="form-label">Preferred Work Setting:</label>
-              <input
-                type="text"
-                className="form-input"
-                value={workSetting}
-                onChange={(e) => setWorkSetting(e.target.value)}
-                placeholder="e.g., office, outdoors, hospital, creative studio"
-                required
-              />
-            </div>
-
-            <button type="submit" className="advisor-button" disabled={loadingCourse}>
-              {loadingCourse ? "Analyzing..." : "Find My Course"}
-            </button>
-          </form>
-
-          {error && <div className="advisor-error">{error}</div>}
-
-          {recommendation && (
-            <div className="advisor-recommendation">
-              <div className="advisor-course">
-                <h5>Recommended Course:</h5>
-                <strong>{recommendation.recommended_course}</strong>
-                <p>{recommendation.reason}</p>
+        <div className="advisor-layout active-layout">
+          {/* Left side – Form & Recommendation */}
+          <div className="advisor-left">
+            <form onSubmit={handleSubmit} className="advisor-form">
+              <div className="form-group">
+                <label className="form-label">Hobbies:</label>
+                <input
+                  type="text"
+                  className="form-input"
+                  value={hobbies}
+                  onChange={(e) => setHobbies(e.target.value)}
+                  placeholder="e.g., coding, drawing, helping others"
+                  required
+                />
               </div>
-            </div>
-          )}
-        </div>
 
-        {/* Right side – Chatbot */}
-        {recommendation && (
-          <div className="advisor-chat">
-            <h6 className="chat-heading">Learn more about the course:</h6>
-            <div className="chat-container">
-              {chatHistory.map((chat, index) => (
-                <div key={index} className="chat-message">
-                  <div className="chat-user">{chat.question}</div>
-                  <div className="chat-ai">{chat.answer}</div>
+              <div className="form-group">
+                <label className="form-label">Favorite Subject:</label>
+                <input
+                  type="text"
+                  className="form-input"
+                  value={favoriteSubject}
+                  onChange={(e) => setFavoriteSubject(e.target.value)}
+                  placeholder="e.g., Math, Science, English"
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">Preferred Work Setting:</label>
+                <input
+                  type="text"
+                  className="form-input"
+                  value={workSetting}
+                  onChange={(e) => setWorkSetting(e.target.value)}
+                  placeholder="e.g., office, outdoors, hospital, creative studio"
+                  required
+                />
+              </div>
+
+              <button type="submit" className="advisor-button" disabled={loadingCourse}>
+                {loadingCourse ? "Analyzing..." : "Find My Course"}
+              </button>
+            </form>
+
+            {error && <div className="advisor-error">{error}</div>}
+
+            {recommendation && (
+              <div className="advisor-recommendation">
+                <div className="advisor-course">
+                  <h5>Recommended Course:</h5>
+                  <strong>{recommendation.recommended_course}</strong>
+                  <p>{recommendation.reason}</p>
                 </div>
-              ))}
+              </div>
+            )}
+          </div>
+
+          {/* Right side – Chatbot (always visible) */}
+          <div className="advisor-chat">
+            <h6 className="chat-heading">Ask about courses:</h6>
+            <div className="chat-container">
+              {chatHistory.length > 0 ? (
+                chatHistory.map((chat, index) => (
+                  <div key={index} className="chat-message">
+                    <div className="chat-user">{chat.question}</div>
+                    <div className="chat-ai">{chat.answer}</div>
+                  </div>
+                ))
+              ) : (
+                <div className="chat-placeholder">
+                  👋 Hi! I’m your Course Advisor AI.  
+                  You can start by entering your hobbies, subjects, and work preferences — or ask me about any course!
+                </div>
+              )}
               <div ref={chatEndRef}></div>
             </div>
 
@@ -125,7 +125,7 @@ function CourseAdvisorUI() {
                 className="chat-input"
                 value={followUpQuestion}
                 onChange={(e) => setFollowUpQuestion(e.target.value)}
-                placeholder="Ask more about this course..."
+                placeholder="Ask about any course..."
                 disabled={loadingChat}
                 required
               />
@@ -134,11 +134,10 @@ function CourseAdvisorUI() {
               </button>
             </form>
           </div>
-        )}
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
 }
 
 export default CourseAdvisorUI;
